@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ibm.common.utils.bak1.FileUtils;
-import com.ibm.common.utils.ftp.FtpClientServiceImpl;
-import com.ibm.sc.campign.constant.ReportConstant;
+import com.ibm.common.core.ftp.FtpClientServiceImpl;
 
 /**
  * 报表文件服务
@@ -97,7 +96,7 @@ public class ReportFileServiceImpl {
 	 * @return
 	 */
 	public boolean deleteFtpReportFile(String ftpFileNameStr) {
-		String ftpFileName = ReportConstant.FTP_REPORT_PATH + ftpFileNameStr;
+		String ftpFileName = ftpFileNameStr;
 		logger.info("从ftp删除报表文件：{} 开始", ftpFileName);
 		try {
 			ftpClientService.connect();
@@ -120,7 +119,7 @@ public class ReportFileServiceImpl {
 	 * @return
 	 */
 	public boolean deleteFtpReportDir(String ftpFilePathStr) {
-		String ftpFilePath = ReportConstant.FTP_REPORT_PATH + ftpFilePathStr;
+		String ftpFilePath = ftpFilePathStr;
 		logger.info("从ftp删除报表目录：{} 开始", ftpFilePath);
 		try {
 			ftpClientService.connect();
@@ -169,7 +168,7 @@ public class ReportFileServiceImpl {
 	 * @return
 	 */
 	public boolean deleteLocalReportFile(String localFileNameStr) {
-		String localFileName = ReportConstant.LOCAL_REPORT_PATH + localFileNameStr;
+		String localFileName = localFileNameStr;
 		logger.info("删除本地报表文件：{} 开始", localFileName);
 		File file = new File(localFileName);
 		boolean isDelete = false;
@@ -191,7 +190,7 @@ public class ReportFileServiceImpl {
 	 * @return
 	 */
 	public boolean deleteLocalReportDir(String localFilePathStr) {
-		String localFilePath = ReportConstant.LOCAL_REPORT_PATH + localFilePathStr;
+		String localFilePath = localFilePathStr;
 		logger.info("删除本地报表目录：{} 开始", localFilePath);
 		try {
 			FileUtils.deleteDirectory(new File(localFilePath));

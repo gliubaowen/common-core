@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author wliub
+ * @author LiuBaoWen
  *
  */
 package com.ibm.common.core.file;
