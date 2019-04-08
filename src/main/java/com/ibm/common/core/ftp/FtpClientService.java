@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-public class FtpClientServiceImpl {
+public class FtpClientService {
 
 	/* 默认字符集 */
 	private static final String DEFAULT_CHARSET = "UTF-8";

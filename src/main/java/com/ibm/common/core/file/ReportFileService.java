@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ibm.common.core.ftp.FtpClientServiceImpl;
+import com.ibm.common.core.ftp.FtpClientService;
 
 /**
  * 报表文件服务
@@ -20,12 +20,12 @@ import com.ibm.common.core.ftp.FtpClientServiceImpl;
  *
  */
 @Service
-public class ReportFileServiceImpl {
+public class ReportFileService {
 
-	private Logger logger = LoggerFactory.getLogger(ReportFileServiceImpl.class);
+	private Logger logger = LoggerFactory.getLogger(ReportFileService.class);
 
 	@Autowired
-	FtpClientServiceImpl ftpClientService;
+	FtpClientService ftpClientService;
 
 	/**
 	 * 上传报表文件到ftp
