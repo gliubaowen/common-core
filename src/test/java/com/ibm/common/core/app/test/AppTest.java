@@ -1,5 +1,12 @@
 package com.ibm.common.core.app.test;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.alibaba.fastjson.JSON;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -34,5 +41,19 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
+    }
+    
+    public void test() {
+    	List<String> linkedListTemp = new LinkedList<String>();
+    	for (int i = 0; i < 10; i++) {
+    		String sizeCode = "123456";
+    		StringUtils.isBlank(sizeCode);
+    		StringUtils.isEmpty(sizeCode);
+    		//以尺寸编码为主键进行去重
+    		if (!linkedListTemp.contains(sizeCode)) {
+    			linkedListTemp.add(sizeCode);
+    		}
+		}
+    	System.out.println(JSON.toJSONString(linkedListTemp));
     }
 }

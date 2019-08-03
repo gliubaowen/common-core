@@ -73,9 +73,9 @@ public class FtpClientService {
 	 * @param password
 	 */
 	public void setFtpProperties(String host, int port, String username, String password) {
-		this.host = StringUtils.isEmpty(host) ? "localhost" : host;
+		this.host = StringUtils.isBlank(host) ? "localhost" : host;
 		this.port = port <= 0 ? 21 : port;
-		this.username = StringUtils.isEmpty(username) ? "anonymous" : username;
+		this.username = StringUtils.isBlank(username) ? "anonymous" : username;
 		this.password = password;
 	}
 
@@ -211,9 +211,9 @@ public class FtpClientService {
 	 * @author LiuBaoWen
 	 */
 	private void initFtpBasePath() throws IOException {
-		if (StringUtils.isEmpty(ftpBasePath)) {
+		if (StringUtils.isBlank(ftpBasePath)) {
 			synchronized (this) {
-				if (StringUtils.isEmpty(ftpBasePath)) {
+				if (StringUtils.isBlank(ftpBasePath)) {
 					ftpBasePath = ftpClient.printWorkingDirectory();
 				}
 			}
