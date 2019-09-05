@@ -1,4 +1,4 @@
-package com.ibm.common.core.ftp;
+package com.ibm.common.core.ssh;
 
 import java.io.File;
 import java.io.FileNotFoundException;
