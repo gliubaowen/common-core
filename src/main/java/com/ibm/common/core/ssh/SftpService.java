@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.ChannelSftp.LsEntry;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -23,12 +26,14 @@ import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
 
 /**
- * 类说明 sftp工具类
+ * sftp工具类
+ * 
+ * @author LiuBaoWen
+ *
  */
 @Service
 public class SftpService implements AutoCloseable {
 
-	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(SftpService.class);
 
 	private ChannelSftp sftp;
@@ -36,27 +41,30 @@ public class SftpService implements AutoCloseable {
 	private Session session;
 
 	/** SFTP 登录用户名 */
-	@Value("#{APP_PROP['ftp.pos.user']}")
-	private String username = "root";
+	@Value("${ssh.username}")
+	private String username;
 	/** SFTP 登录密码 */
-	@Value("#{APP_PROP['ftp.pos.password']}")
-	private String password = "password";
+	@Value("${ssh.password}")
+	private String password;
 	/** 私钥 */
 	private String privateKey;
 	/** SFTP 服务器地址 */
-	@Value("#{APP_PROP['ftp.pos.host']}")
-	private String host = "10.3.13.109";
+	@Value("${ssh.host}")
+	private String host;
 	/** SFTP 端口 */
-	@Value("#{APP_PROP['ftp.pos.port']}")
+	@Value("#{${ssh.port}}")
 	private int port = 22;
-	// ftp 路径
-	@Value("#{APP_PROP['ftp.pos.path']}")
-	private String path;
-	// 超时时间
+	/** 超时时间 */
 	private int timeout = 1000;
 
 	/**
 	 * 构造基于密码认证的sftp对象
+	 * 
+	 * @author LiuBaoWen
+	 * @param username
+	 * @param password
+	 * @param host
+	 * @param port
 	 */
 	public void setSftpProperties(String username, String password, String host, int port) {
 		this.username = username;
@@ -67,6 +75,12 @@ public class SftpService implements AutoCloseable {
 
 	/**
 	 * 构造基于秘钥认证的sftp对象
+	 * 
+	 * @author LiuBaoWen
+	 * @param username
+	 * @param host
+	 * @param port
+	 * @param privateKey
 	 */
 	public void setSftpProperties(String username, String host, int port, String privateKey) {
 		this.username = username;
@@ -76,7 +90,9 @@ public class SftpService implements AutoCloseable {
 	}
 
 	/**
-	 * 连接sftp服务器
+	 * 登录sftp服务器
+	 * 
+	 * @author LiuBaoWen
 	 */
 	public void login() {
 		try {
@@ -102,13 +118,15 @@ public class SftpService implements AutoCloseable {
 			logger.debug("connected successfully");
 			sftp = (ChannelSftp) channel;
 		} catch (JSchException e) {
-			logger.error("sftp login failed",e);
+			logger.error("sftp login failed", e);
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * 关闭连接 server
+	 * 
+	 * @author LiuBaoWen
 	 */
 	public void logout() {
 		if (sftp != null) {
@@ -193,6 +211,26 @@ public class SftpService implements AutoCloseable {
 	}
 
 	/**
+	 * 判断目录是否存在
+	 * 
+	 * @param directory
+	 * @return
+	 */
+	public boolean isDirExist(String directory) {
+		boolean isDirExistFlag = false;
+		try {
+			SftpATTRS sftpATTRS = sftp.lstat(directory);
+			isDirExistFlag = true;
+			return sftpATTRS.isDir();
+		} catch (Exception e) {
+			if (e.getMessage().toLowerCase().equals("no such file")) {
+				isDirExistFlag = false;
+			}
+		}
+		return isDirExistFlag;
+	}
+
+	/**
 	 * 下载文件
 	 * 
 	 * @param directory    下载目录
@@ -226,6 +264,31 @@ public class SftpService implements AutoCloseable {
 	 */
 	public Vector<?> listFiles(String directory) throws SftpException {
 		return sftp.ls(directory);
+	}
+
+	/**
+	 * 获取srcPath路径下以regex格式指定的文件列表
+	 * 
+	 * @param sftp
+	 * @param srcPath sftp服务器上的目录
+	 * @param regex   需要匹配的文件名
+	 * @return
+	 * @throws SftpException
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<String> listFiles(ChannelSftp sftp, String srcPath, String regex) throws SftpException {
+		List<String> fileList = new ArrayList<String>();
+		sftp.cd(srcPath); // 如果srcPath不是目录则会抛出异常
+		if ("".equals(regex) || regex == null) {
+			regex = "*";
+		}
+		Vector<LsEntry> sftpFile = sftp.ls(regex);
+		String fileName = null;
+		for (LsEntry lsEntry : sftpFile) {
+			fileName = lsEntry.getFilename();
+			fileList.add(fileName);
+		}
+		return fileList;
 	}
 
 	/**

@@ -1,27 +1,27 @@
 package com.ibm.common.core.aop;
 
-import java.util.Arrays;
-
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 切面日志配置
  * <p>
- * 使用fastjson解析 Page bean 为json报错
+ * 使用fastjson解析参数
  * </p>
  * 
  * @author LiuBaoWen
  *
  */
-@Aspect
+//@Aspect
 @Component
 public class LogAspect {
 
@@ -44,11 +44,10 @@ public class LogAspect {
 		Object[] args = joinPoint.getArgs();
 		startTimeMillis = System.currentTimeMillis();
 		logger.info("start execute {}#{}, time:{}, args:{}", className, methodName, startTimeMillis,
-				Arrays.toString(args)
-		/* JSON.toJSONString(args) */);
+				JSON.toJSONString(args));
 	}
 
-	// @After("logPointcut()")
+	@After("logPointcut()")
 	public void doAfter(JoinPoint joinPoint) {
 		String className = joinPoint.getTarget().getClass().getName();
 		String methodName = joinPoint.getSignature().getName();
@@ -62,7 +61,7 @@ public class LogAspect {
 		String methodName = joinPoint.getSignature().getName();
 		endTimeMillis = System.currentTimeMillis();
 		logger.info("end execute {}#{}, time:{}, execute time:{}, execute result:{}", className, methodName,
-				endTimeMillis, endTimeMillis - startTimeMillis, result/* JSON.toJSONString(result) */);
+				endTimeMillis, endTimeMillis - startTimeMillis, JSON.toJSONString(result));
 	}
 
 	@AfterThrowing(pointcut = "logPointcut()", throwing = "ex")

@@ -43,13 +43,13 @@ public class FtpClientService {
 
 	private static final String DAILY_FILE_PATH = "dailyFilePath";
 
-	@Value("${ftp.doc.url}")
+	@Value("${ftp.url}")
 	private String host;
-	@Value("${ftp.doc.port}")
+	@Value("${ftp.port}")
 	private int port;
-	@Value("${ftp.doc.username}")
+	@Value("${ftp.username}")
 	private String username;
-	@Value("${ftp.doc.password}")
+	@Value("${ftp.password}")
 	private String password;
 
 	private static FTPClient ftpClient = new FTPClient();
