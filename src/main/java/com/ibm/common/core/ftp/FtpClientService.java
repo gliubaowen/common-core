@@ -43,7 +43,7 @@ public class FtpClientService {
 
 	private static final String DAILY_FILE_PATH = "dailyFilePath";
 
-	@Value("${ftp.url}")
+	@Value("${ftp.host}")
 	private String host;
 	@Value("${ftp.port}")
 	private int port;
