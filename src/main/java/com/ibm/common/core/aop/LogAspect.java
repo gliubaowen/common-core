@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import com.alibaba.fastjson.JSON;
  * @author LiuBaoWen
  *
  */
-//@Aspect
+@Aspect
 @Component
 public class LogAspect {
 
@@ -33,7 +34,7 @@ public class LogAspect {
 
 	private long exceptionTimeMillis = 0;
 
-	@Pointcut("execution(* com.ibm.modules.pdm..*(..))")
+	@Pointcut("execution(* com.ibm.common..*(..))")
 	public void logPointcut() {
 	}
 
@@ -54,7 +55,6 @@ public class LogAspect {
 		logger.info("end execute {}#{}, time:{}", className, methodName, System.currentTimeMillis());
 	}
 
-	// fastjson from bean to json throws exception
 	@AfterReturning(pointcut = "logPointcut()", returning = "result")
 	public void doAfterReturning(JoinPoint joinPoint, Object result) {
 		String className = joinPoint.getTarget().getClass().getName();
