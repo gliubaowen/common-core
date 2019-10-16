@@ -1,7 +1,6 @@
 package com.ibm.common.core.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -48,7 +47,7 @@ public class LogAspect {
 				JSON.toJSONString(args));
 	}
 
-	@After("logPointcut()")
+//	@After("logPointcut()")
 	public void doAfter(JoinPoint joinPoint) {
 		String className = joinPoint.getTarget().getClass().getName();
 		String methodName = joinPoint.getSignature().getName();
