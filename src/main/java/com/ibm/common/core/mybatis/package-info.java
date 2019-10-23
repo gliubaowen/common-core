@@ -2,7 +2,7 @@
  * 
  */
 /**
- * mybatis集成
+ * mybatis支持
  * 
  * @author LiuBaoWen
  *
