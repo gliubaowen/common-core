@@ -9,7 +9,6 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.ibm.common.core.ftp.FtpClientService;
 
@@ -19,7 +18,7 @@ import com.ibm.common.core.ftp.FtpClientService;
  * @author LiuBaoWen
  *
  */
-@Service
+//@Service
 public class ReportFileService {
 
 	private Logger logger = LoggerFactory.getLogger(ReportFileService.class);
