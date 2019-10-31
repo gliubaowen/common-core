@@ -22,7 +22,6 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -33,7 +32,7 @@ import org.springframework.stereotype.Service;
  * @author LiuBaoWen
  * @version 1.0
  */
-@Service
+//@Service
 public class FtpClientService {
 
 	/* 默认字符集 */
