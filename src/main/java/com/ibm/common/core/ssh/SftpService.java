@@ -13,8 +13,6 @@ import java.util.Vector;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -31,7 +29,10 @@ import com.jcraft.jsch.SftpException;
  * @author LiuBaoWen
  *
  */
-@Service
+//@Component
+//@Service
+//@Configuration
+//@PropertySource("classpath:application.yaml")
 public class SftpService implements AutoCloseable {
 
 	private static Logger logger = LoggerFactory.getLogger(SftpService.class);
@@ -41,18 +42,18 @@ public class SftpService implements AutoCloseable {
 	private Session session;
 
 	/** SFTP 登录用户名 */
-	@Value("${ssh.username}")
+//	@Value("${ssh.username}")
 	private String username;
 	/** SFTP 登录密码 */
-	@Value("${ssh.password}")
+//	@Value("${ssh.password}")
 	private String password;
 	/** 私钥 */
 	private String privateKey;
 	/** SFTP 服务器地址 */
-	@Value("${ssh.host}")
+//	@Value("${ssh.host}")
 	private String host;
 	/** SFTP 端口 */
-	@Value("#{${ssh.port}}")
+//	@Value("${ssh.port}")
 	private int port = 22;
 	/** 超时时间 */
 	private int timeout = 1000;
