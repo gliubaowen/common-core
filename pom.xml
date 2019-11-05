@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ibm</groupId>
+	<groupId>com.lbw</groupId>
 	<artifactId>common-core</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>common-core</name>
@@ -23,9 +23,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.ibm</groupId>
+			<groupId>com.lbw</groupId>
 			<artifactId>common-utils</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.3</version>
 		</dependency>
 
 		<dependency>

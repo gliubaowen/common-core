@@ -1,4 +1,4 @@
-package com.ibm.common.core.file;
+package com.lbw.common.core.file;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ibm.common.core.ftp.FtpClientService;
+import com.lbw.common.core.ftp.FtpClientService;
 
 /**
  * 报表文件服务

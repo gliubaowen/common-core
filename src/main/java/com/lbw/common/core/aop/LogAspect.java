@@ -1,4 +1,4 @@
-package com.ibm.common.core.aop;
+package com.lbw.common.core.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

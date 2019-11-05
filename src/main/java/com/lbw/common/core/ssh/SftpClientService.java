@@ -1,4 +1,4 @@
-package com.ibm.common.core.ssh;
+package com.lbw.common.core.ssh;
 
 import java.io.File;
 import java.io.FileNotFoundException;

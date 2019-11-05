@@ -5,4 +5,4 @@
  * @author LiuBaoWen
  *
  */
-package com.ibm.common.core.ssh;
+package com.lbw.common.core.ssh;

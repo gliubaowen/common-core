@@ -1,4 +1,4 @@
-package com.ibm.common.core.ftp;
+package com.lbw.common.core.ftp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

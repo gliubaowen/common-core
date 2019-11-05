@@ -7,4 +7,4 @@
  * @author LiuBaoWen
  *
  */
-package com.ibm.common.core.ftp;
+package com.lbw.common.core.ftp;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ibm.common.core.exception;
+package com.lbw.common.core.exception;
 
 /**
  * common-core异常类

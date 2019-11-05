@@ -7,4 +7,4 @@
  * @author LiuBaoWen
  *
  */
-package com.ibm.common.core.exception;
+package com.lbw.common.core.exception;
